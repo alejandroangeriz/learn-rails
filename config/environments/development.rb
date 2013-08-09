@@ -26,4 +26,21 @@ LearnRails::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+￼￼config.action_mailer.smtp_settings = {
+  address: "smtp.gmail.com",
+  port: 587,
+  domain: ENV["DOMAIN_NAME"],
+  authentication: "plain",
+  enable_starttls_auto: true,
+  # we are using the ENV["GMAIL_USERNAME"] and ENV["GMAIL_PASSWORD"] 
+  # environment variables that we set in the config/application.yml file.
+  # We could “hard code” a username and password here but that would expose
+  # confidential data if your GutHub repository is public. Using environment 
+  # variables from the config/application.yml file keeps your secrets safe.
+  user_name: ENV["GMAIL_USERNAME"],
+  password: ENV["GMAIL_PASSWORD"]
+}
+# Send email in development mode.
+config.action_mailer.perform_deliveries = true
+
 end
